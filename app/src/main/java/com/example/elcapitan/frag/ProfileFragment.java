@@ -14,9 +14,11 @@ import com.example.elcapitan.model.Job;
 public class ProfileFragment extends Fragment {
     private static final String TITLE = "title";
     private static final String COMPANY = "company";
+    private static final String COMPANY_URL = "company url";
 
     private String title;
     private String company;
+    private String companyUrl;
 
     private com.example.elcapitan.OnFragmentInteractionListener listener;
 
@@ -36,6 +38,7 @@ public class ProfileFragment extends Fragment {
         if (getArguments() != null) {
             title = getArguments().getString(TITLE);
             company = getArguments().getString(COMPANY);
+            companyUrl = getArguments().getString(COMPANY_URL);
         }
     }
 
