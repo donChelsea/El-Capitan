@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">El Capitan</string>
+    <string name="el_capitan">El Capitan</string>
+    <string name="you_re_in_charge_of_where_you_land">You\'re in charge of where you land</string>
+    <string name="find_your_dream_job">Find your dream job</string>
+    <string name="language">Language</string>
+    <string name="location">Location by state</string>
+    <string name="part_time">See part time options?</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="find_my_dream_job">Find my dream job</string>
+    <string name="company_logo">Company logo</string>
+    <string name="location_view">Location</string>
+    <string name="created_at">Created at</string>
+    <string name="type">Type</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="results">Results</string>
+    <string name="profile">Profile</string>
+    <string name="company">Company</string>
+</resources>
