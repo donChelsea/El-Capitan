@@ -1,6 +1,6 @@
 package com.example.elcapitan;
 
-import android.content.Intent;
+
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,24 +15,34 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.elcapitan.frag.WebsiteFragment;
 import com.example.elcapitan.frag.ProfileFragment;
-import com.example.elcapitan.frag.DetailFragment3;
-import com.example.elcapitan.frag.MainFragment;
-import com.example.elcapitan.frag.ResultsFragment;
-import com.example.elcapitan.model.Job;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.elcapitan.frag.MainFragment.SHOW_PART_TIME;
-import static com.example.elcapitan.frag.MainFragment.USER_LANGUAGE;
-import static com.example.elcapitan.frag.MainFragment.USER_LOCATION;
 
 public class DetailActivity extends AppCompatActivity implements OnFragmentInteractionListener {
-    @BindView(R.id.container) ViewPager viewPager;
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.tabs) TabLayout tabLayout;
-    @BindView(R.id.fab) FloatingActionButton fab;
+    public static final String TITLE = "title";
+    public static final String COMPANY = "company";
+    public static final String COMPANY_URL = "company url";
+    public static final String TYPE = "type";
+    public static final String URL = "url";
+    public static final String CREATED_AT = "created at";
+    public static final String LOCATION = "location";
+    public static final String DESCRIPTION = "description";
+    public static final String COMPANY_LOGO = "company logo";
+    @BindView(R.id.container)
+    ViewPager viewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    Bundle job;
+    public static String websiteUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +60,10 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
 
-        Intent intent = getIntent();
-        if (intent == null) {
-            return;
-        }
-        String userLocation = intent.getStringExtra(USER_LOCATION);
-        String userLanguage = intent.getStringExtra(USER_LANGUAGE);
-        boolean showPartTime = intent.getBooleanExtra(SHOW_PART_TIME, MainFragment.showPartTime);
+        job = getIntent().getExtras();
+        assert job != null;
+        websiteUrl = job.getString(COMPANY_URL);
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,24 +74,29 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-
-
     @Override
-    public void onFragmentInteraction(Job job) {
-        ProfileFragment profileFragment = new ProfileFragment().newInstance();
-
+    public void onResultsFragmentInteraction(String language, String location, boolean showPartTime) {
+        // NON OP
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public WebsiteFragment onCompanyFragmentInteraction(String url) {
+        new WebsiteFragment();
+        WebsiteFragment websiteFragment = new WebsiteFragment().newInstance();
+        Bundle args = new Bundle();
+        args.putString(COMPANY_URL, url);
+        websiteFragment.setArguments(args);
+        return new WebsiteFragment();
+    }
 
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -97,25 +105,18 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    ResultsFragment resultsFragment = new ResultsFragment().newInstance();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container, resultsFragment)
-                            .addToBackStack("results")
-                            .commit();
-                    return resultsFragment;
+                    ProfileFragment profileFragment = new ProfileFragment().newInstance();
+                    profileFragment.setArguments(job);
+                    return profileFragment;
                 case 1:
-                    new ProfileFragment();
-                    return ProfileFragment.newInstance();
-                case 2:
-                    new DetailFragment3();
-                    return DetailFragment3.newInstance();
+                    onCompanyFragmentInteraction(websiteUrl);
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
     }
 }
