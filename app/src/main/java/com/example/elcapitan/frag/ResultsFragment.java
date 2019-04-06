@@ -1,6 +1,7 @@
 package com.example.elcapitan.frag;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,28 +40,31 @@ public class ResultsFragment extends Fragment {
     private static final String TAG = "ResultFragment";
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     Retrofit retrofit;
-    private OnFragmentInteractionListener listener;
+    OnFragmentInteractionListener listener;
 
 
     public ResultsFragment() {
     }
 
     public ResultsFragment newInstance() {
-        ResultsFragment resultsFragment = new ResultsFragment();
-        Bundle args = new Bundle();
-        args.putString(USER_LANGUAGE, userLanguage);
-        args.putString(USER_LOCATION, userLocation);
-        args.putBoolean(SHOW_PART_TIME, showPartTime);
-        resultsFragment.setArguments(args);
-        return resultsFragment;
+        return new ResultsFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         container.removeAllViews();
         return inflater.inflate(R.layout.fragment_results, container, false);
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
+        }
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -68,9 +72,7 @@ public class ResultsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         Bundle args = getArguments();
-        if (args == null) {
-            return;
-        }
+        if (args == null) return;
         String userLocation = args.getString(USER_LOCATION);
         String userLanguage = args.getString(USER_LANGUAGE);
         boolean showPartTime = args.getBoolean(SHOW_PART_TIME);
@@ -80,7 +82,7 @@ public class ResultsFragment extends Fragment {
         Call<List<Job>> listCall = jobService.getJobs(userLanguage, showPartTime, userLocation);
         listCall.enqueue(new Callback<List<Job>>() {
             @Override
-            public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
+            public void onResponse(@NonNull Call<List<Job>> call, @NonNull Response<List<Job>> response) {
                 assert response.body() != null;
                 List<Job> jobs = response.body();
                 recyclerView.setAdapter(new JobAdapter(jobs, listener));
@@ -88,7 +90,7 @@ public class ResultsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Job>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Job>> call, @NonNull Throwable t) {
                 Log.d(TAG, "onFailure: --- " + t.getMessage());
             }
         });

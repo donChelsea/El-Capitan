@@ -21,6 +21,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="results">Results</string>
-    <string name="profile">Profile</string>
+    <string name="profile">Job Profile</string>
     <string name="company">Company</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="company_info">Company info</string>
 </resources>

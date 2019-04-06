@@ -65,8 +65,8 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        Button testButton = view.findViewById(R.id.job_search_button);
-        testButton.setOnClickListener(v -> {
+        Button jobSearchButton = view.findViewById(R.id.job_search_button);
+        jobSearchButton.setOnClickListener(v -> {
             userLanguage = languageEdittext.getText().toString().toLowerCase().trim();
             userLocation = locationEdittext.getText().toString().toLowerCase().trim();
             partTimeCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -74,11 +74,7 @@ public class MainFragment extends Fragment {
                     showPartTime = true;
                 }
             });
-            Intent intent = new Intent(view.getContext(), DetailActivity.class);
-            intent.putExtra(USER_LANGUAGE, userLanguage);
-            intent.putExtra(SHOW_PART_TIME, showPartTime);
-            intent.putExtra(USER_LOCATION, userLocation);
-            startActivity(intent);
+            fragmentInteractionListener.onResultsFragmentInteraction(userLanguage, userLocation, showPartTime);
         });
     }
 }

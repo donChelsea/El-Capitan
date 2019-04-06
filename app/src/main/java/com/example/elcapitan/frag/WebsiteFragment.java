@@ -1,49 +1,49 @@
 package com.example.elcapitan.frag;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.elcapitan.OnFragmentInteractionListener;
 import com.example.elcapitan.R;
 
-public class DetailFragment3 extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import static com.example.elcapitan.DetailActivity.COMPANY_URL;
 
-    private String mParam1;
-    private String mParam2;
+// will be the web viewer for the application
+
+public class WebsiteFragment extends Fragment {
+    String websiteUrl;
 
     private com.example.elcapitan.OnFragmentInteractionListener mListener;
 
-    public DetailFragment3() {
+    public WebsiteFragment() {
     }
 
-    public static DetailFragment3 newInstance() {
-        DetailFragment3 fragment = new DetailFragment3();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
+    public static WebsiteFragment newInstance() {
+        return new WebsiteFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            websiteUrl = getArguments().getString(COMPANY_URL);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_detail3, container, false);
+        return inflater.inflate(R.layout.fragment_website, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
     }
 
     @Override
