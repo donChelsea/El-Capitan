@@ -1,6 +1,8 @@
 package com.example.elcapitan;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -73,11 +75,20 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.github:
+                Intent intentGitHub = new Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse("https://github.com/donChelsea"));
+                startActivity(intentGitHub);
+                return true;
+            case R.id.linkedin:
+                Intent intentLinkedIn = new Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse("https://www.linkedin.com/in/chelsea-katsidzira-184789108/"));
+                startActivity(intentLinkedIn);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -86,13 +97,13 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
     }
 
     @Override
-    public WebsiteFragment onCompanyFragmentInteraction(String url) {
-        new WebsiteFragment();
-        WebsiteFragment websiteFragment = new WebsiteFragment().newInstance();
-        Bundle args = new Bundle();
-        args.putString(COMPANY_URL, url);
-        websiteFragment.setArguments(args);
-        return new WebsiteFragment();
+    public WebsiteFragment onWebsiteFragmentInteraction(String url) {
+        return null;
+    }
+
+    @Override
+    public ProfileFragment onProfileFragmentInteraction(Bundle args) {
+        return null;
     }
 
 
@@ -109,7 +120,11 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
                     profileFragment.setArguments(job);
                     return profileFragment;
                 case 1:
-                    onCompanyFragmentInteraction(websiteUrl);
+                    WebsiteFragment websiteFragment = WebsiteFragment.newInstance();
+                    Bundle args = new Bundle();
+                    args.putString(COMPANY_URL, websiteUrl);
+                    websiteFragment.setArguments(args);
+                    return websiteFragment;
             }
             return null;
         }

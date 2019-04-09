@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.elcapitan.frag.MainFragment;
+import com.example.elcapitan.frag.ProfileFragment;
 import com.example.elcapitan.frag.ResultsFragment;
 import com.example.elcapitan.frag.WebsiteFragment;
 
@@ -41,7 +42,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     }
 
     @Override
-    public WebsiteFragment onCompanyFragmentInteraction(String url) {
+    public WebsiteFragment onWebsiteFragmentInteraction(String url) {
+        return null;
+    }
 
+    @Override
+    public ProfileFragment onProfileFragmentInteraction(Bundle args) {
+        return null;
     }
 }

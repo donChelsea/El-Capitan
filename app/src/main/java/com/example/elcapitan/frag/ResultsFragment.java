@@ -32,9 +32,6 @@ import retrofit2.Retrofit;
 import static com.example.elcapitan.frag.MainFragment.SHOW_PART_TIME;
 import static com.example.elcapitan.frag.MainFragment.USER_LANGUAGE;
 import static com.example.elcapitan.frag.MainFragment.USER_LOCATION;
-import static com.example.elcapitan.frag.MainFragment.showPartTime;
-import static com.example.elcapitan.frag.MainFragment.userLanguage;
-import static com.example.elcapitan.frag.MainFragment.userLocation;
 
 public class ResultsFragment extends Fragment {
     private static final String TAG = "ResultFragment";

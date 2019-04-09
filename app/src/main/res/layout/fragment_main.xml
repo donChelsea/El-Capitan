@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/capitanPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".frag.MainFragment">
 
@@ -12,9 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:fontFamily="@font/ancientmedium"
         android:text="@string/el_capitan"
-        android:textSize="30sp"
+        android:textSize="80sp"
         android:gravity="center"
+        android:textColor="@color/capitanSecondaryText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,12 +26,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:textSize="20sp"
+        android:textColor="@color/capitanPrimeText"
+        android:fontFamily="@font/comfortaa"
         android:gravity="center"
         android:text="@string/you_re_in_charge_of_where_you_land"
-        app:layout_constraintTop_toBottomOf="@id/title_textview"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_textview" />
 
     <Button
         android:id="@+id/job_search_button"
@@ -39,7 +43,10 @@
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/find_my_dream_job"
-        android:textSize="15sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/comfortaa"
+        android:padding="8dp"
+        android:background="@color/capitanSecondaryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,25 +55,27 @@
     <EditText
         android:id="@+id/language_edittext"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="24dp"
+        android:background="@color/capitanSecondaryText"
         android:gravity="center"
-        android:inputType="text"
         android:hint="@string/language"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <EditText
         android:id="@+id/location_edittext"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="24dp"
+        android:background="@color/capitanSecondaryText"
         android:gravity="center"
-        android:inputType="text"
         android:hint="@string/location"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/language_edittext" />
@@ -75,12 +84,17 @@
         android:id="@+id/parttime_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/part_time"
-        android:layout_margin="24dp"
+        android:layout_margin="60dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/location_edittext"
+        android:text="@string/part_time"
+        android:textColor="@color/capitanPrimeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20dp"
+        android:buttonTint="@color/capitanYellow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/location_edittext" />
 
     <ImageView
         android:id="@+id/search_icon"

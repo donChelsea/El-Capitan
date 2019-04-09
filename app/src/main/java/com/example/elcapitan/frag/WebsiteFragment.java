@@ -8,17 +8,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
+import com.example.elcapitan.OnFragmentInteractionListener;
 import com.example.elcapitan.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.example.elcapitan.DetailActivity.COMPANY_URL;
 
-// will be the web viewer for the application
-
 public class WebsiteFragment extends Fragment {
     String websiteUrl;
-
-    private com.example.elcapitan.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener listener;
+    @BindView(R.id.webview) WebView webView;
 
     public WebsiteFragment() {
     }
@@ -43,23 +48,36 @@ public class WebsiteFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ButterKnife.bind(this, view);
+
+        webView.setWebViewClient(new WebViewClient());
+
+
+
+        if (websiteUrl == null) {
+//            webView.loadUrl("use other website that displays company info, better business beaureu? ");
+        } else {
+            webView.loadUrl(websiteUrl);
+            WebSettings webSettings = webView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+        }
 
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof com.example.elcapitan.OnFragmentInteractionListener) {
-            mListener = (com.example.elcapitan.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            listener= (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement com.example.elcapitan.OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
     }
 }

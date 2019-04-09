@@ -4,10 +4,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="capitanPrimary">#CC01010E</color>
+    <color name="capitanPrimary">#00043A</color>
     <color name="capitanPrimeText">#036459</color>
     <color name="capitanSecondaryText">#E0F2F1</color>
-    <color name="capitanResultTextViewBackground">#CCE3E3E7</color>
+    <color name="capitanResultTextViewBackground">#000863</color>
+    <color name="capitanWhite">#FFFFFF</color>
+    <color name="capitanYellow">#FFEB3B</color>
+    <color name="capitanGray">#E1E4E4</color>
 
 
 
