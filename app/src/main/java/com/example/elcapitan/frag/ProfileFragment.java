@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Html;
+import android.support.v4.text.HtmlCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.elcapitan.OnFragmentInteractionListener;
 import com.example.elcapitan.R;
-import com.example.elcapitan.model.Job;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.support.v4.text.HtmlCompat.FROM_HTML_MODE_LEGACY;
 import static com.example.elcapitan.DetailActivity.COMPANY;
 import static com.example.elcapitan.DetailActivity.COMPANY_LOGO;
 import static com.example.elcapitan.DetailActivity.COMPANY_URL;
@@ -41,7 +42,7 @@ public class ProfileFragment extends Fragment {
     String location;
     String description;
     String companyLogo;
-    private com.example.elcapitan.OnFragmentInteractionListener listener;
+    OnFragmentInteractionListener listener;
     @BindView(R.id.profile_title_textview) TextView titleTv;
     @BindView(R.id.profile_company_textview) TextView companyTv;
     @BindView(R.id.profile_type_textview) TextView typeTv;
@@ -61,11 +62,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof com.example.elcapitan.OnFragmentInteractionListener) {
-            listener = (com.example.elcapitan.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement com.example.elcapitan.OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -99,15 +100,12 @@ public class ProfileFragment extends Fragment {
         titleTv.setText(title);
         companyTv.setText(company);
         typeTv.setText(type);
-        descriptionTv.setText(Html.fromHtml(description));
-        createdTv.setText(createdAt);
+        descriptionTv.setText(HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_LEGACY));
+        createdTv.setText(correctCreatedAtDate(createdAt));
         locationTv.setText(location);
         Picasso.get().load(companyLogo).into(logoIv);
-        seeMoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // launch intent to view job application in chrome
-            }
+        seeMoreButton.setOnClickListener(v -> {
+            // launch intent to view job application in chrome
         });
     }
 
@@ -116,4 +114,15 @@ public class ProfileFragment extends Fragment {
         super.onDetach();
         listener = null;
     }
+
+    private String correctCreatedAtDate(String string) {
+        String[] stringArray = string.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < 3; i++) {
+            sb.append(stringArray[i]).append(" ");
+        }
+        sb.append(stringArray[5]);
+        return sb.toString();
+    }
+
 }

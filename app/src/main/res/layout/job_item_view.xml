@@ -31,22 +31,25 @@
             android:shadowDy="1"
             android:shadowDx="1"
             android:textColor="@color/capitanPrimeText"
-            android:textSize="20sp"
-            android:background="@color/capitanResultTextViewBackground"/>
+            android:textSize="18sp"
+            android:background="@color/capitanGray"
+            android:fontFamily="@font/comfortaa"
+            />
 
         <TextView
             android:id="@+id/company_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Company name"
+            android:text="@string/company_name"
             android:shadowColor="@android:color/black"
-            android:textSize="17sp"
+            android:textSize="16sp"
+            android:fontFamily="@font/comfortaa"
             android:shadowRadius="1"
             android:shadowDy="1"
             android:shadowDx="1"
             android:textColor="@color/capitanPrimeText"
-            android:background="@color/capitanResultTextViewBackground"/>
+            android:background="@color/capitanGray"/>
 
         <ImageView
             android:id="@+id/company_logo_imageview"
@@ -63,13 +66,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/location_view"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:shadowColor="@android:color/black"
             android:shadowRadius="1"
             android:shadowDy="1"
             android:shadowDx="1"
-            android:textColor="@color/capitanSecondaryText"
-            android:background="@color/capitanResultTextViewBackground"/>
+            android:textColor="@color/capitanPrimeText"
+            android:background="@color/capitanGray"
+            android:fontFamily="@font/comfortaa"
+            />
 
         <TextView
             android:id="@+id/created_at_textview"
@@ -77,13 +82,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/created_at"
-            android:textColor="@color/capitanSecondaryText"
-            android:textSize="20sp"
+            android:textColor="@color/capitanPrimeText"
+            android:textSize="15sp"
             android:shadowColor="@android:color/black"
             android:shadowRadius="1"
             android:shadowDy="1"
             android:shadowDx="1"
-            android:background="@color/capitanResultTextViewBackground"/>
+            android:background="@color/capitanGray"
+            android:fontFamily="@font/comfortaa"
+            />
 
         <TextView
             android:id="@+id/type_textview"
@@ -91,13 +98,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/type"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:shadowColor="@android:color/black"
             android:shadowRadius="1"
             android:shadowDy="1"
             android:shadowDx="1"
-            android:textColor="@color/capitanSecondaryText"
-            android:background="@color/capitanResultTextViewBackground"/>
+            android:textColor="@color/capitanPrimeText"
+            android:background="@color/capitanGray"
+            android:fontFamily="@font/comfortaa"
+            />
 
     </LinearLayout>
 

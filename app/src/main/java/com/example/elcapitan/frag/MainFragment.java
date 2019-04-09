@@ -27,12 +27,9 @@ public class MainFragment extends Fragment {
     public static final String USER_LANGUAGE = "user language";
     public static final String USER_LOCATION = "user location";
     public static final String SHOW_PART_TIME = "show part time";
-    @BindView(R.id.location_edittext)
-    EditText locationEdittext;
-    @BindView(R.id.language_edittext)
-    EditText languageEdittext;
-    @BindView(R.id.parttime_checkbox)
-    CheckBox partTimeCheckbox;
+    @BindView(R.id.location_edittext) EditText locationEdittext;
+    @BindView(R.id.language_edittext) EditText languageEdittext;
+    @BindView(R.id.parttime_checkbox) CheckBox partTimeCheckbox;
     public static boolean showPartTime = false;
     OnFragmentInteractionListener fragmentInteractionListener;
     public static String userLanguage = "";
@@ -69,6 +66,7 @@ public class MainFragment extends Fragment {
         jobSearchButton.setOnClickListener(v -> {
             userLanguage = languageEdittext.getText().toString().toLowerCase().trim();
             userLocation = locationEdittext.getText().toString().toLowerCase().trim();
+            partTimeCheckbox.setTextColor(getResources().getColor(R.color.colorPrimary)) ;
             partTimeCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (partTimeCheckbox.isChecked()) {
                     showPartTime = true;
