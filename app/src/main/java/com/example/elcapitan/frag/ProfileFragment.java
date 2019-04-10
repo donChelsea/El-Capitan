@@ -1,6 +1,8 @@
 package com.example.elcapitan.frag;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +22,6 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.support.v4.text.HtmlCompat.FROM_HTML_MODE_LEGACY;
 import static com.example.elcapitan.DetailActivity.COMPANY;
 import static com.example.elcapitan.DetailActivity.COMPANY_LOGO;
 import static com.example.elcapitan.DetailActivity.COMPANY_URL;
@@ -50,7 +51,6 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.profile_created_textview) TextView createdTv;
     @BindView(R.id.profile_location_textview) TextView locationTv;
     @BindView(R.id.profile_company_logo) ImageView logoIv;
-    @BindView(R.id.see_company_site) Button seeMoreButton;
 
     public ProfileFragment() {
     }
@@ -88,7 +88,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -104,9 +104,6 @@ public class ProfileFragment extends Fragment {
         createdTv.setText(correctCreatedAtDate(createdAt));
         locationTv.setText(location);
         Picasso.get().load(companyLogo).into(logoIv);
-        seeMoreButton.setOnClickListener(v -> {
-            // launch intent to view job application in chrome
-        });
     }
 
     @Override

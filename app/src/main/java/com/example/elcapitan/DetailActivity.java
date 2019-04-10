@@ -2,6 +2,7 @@ package com.example.elcapitan;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -16,9 +17,12 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.elcapitan.frag.WebsiteFragment;
 import com.example.elcapitan.frag.ProfileFragment;
+
+import java.util.zip.Inflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +48,8 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
     FloatingActionButton fab;
     Bundle job;
     public static String websiteUrl;
+    View view;
+    private String jobPosting;
 
 
     @Override
@@ -59,11 +65,14 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(jobPosting));
+            startActivity(intent);
+        });
 
         job = getIntent().getExtras();
         assert job != null;
+        jobPosting = job.getString(URL);
         websiteUrl = job.getString(COMPANY_URL);
     }
 
@@ -134,4 +143,6 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
             return 2;
         }
     }
+
+
 }
