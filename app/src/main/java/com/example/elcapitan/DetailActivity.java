@@ -2,11 +2,9 @@ package com.example.elcapitan;
 
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -22,8 +20,6 @@ import android.view.View;
 import com.example.elcapitan.frag.WebsiteFragment;
 import com.example.elcapitan.frag.ProfileFragment;
 
-import java.util.zip.Inflater;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,7 +27,7 @@ import butterknife.ButterKnife;
 public class DetailActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     public static final String TITLE = "title";
     public static final String COMPANY = "company";
-    public static final String COMPANY_URL = "company url";
+    public static final String WEBSITE_URL = "company url";
     public static final String TYPE = "type";
     public static final String URL = "url";
     public static final String CREATED_AT = "created at";
@@ -59,7 +55,7 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager()));
@@ -75,7 +71,7 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         job = getIntent().getExtras();
         assert job != null;
         jobPosting = job.getString(URL);
-        websiteUrl = job.getString(COMPANY_URL);
+        websiteUrl = job.getString(WEBSITE_URL);
     }
 
     @Override
@@ -131,11 +127,11 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
                     profileFragment.setArguments(job);
                     return profileFragment;
                 case 1:
-                    WebsiteFragment websiteFragment = WebsiteFragment.newInstance();
-                    Bundle args = new Bundle();
-                    args.putString(COMPANY_URL, websiteUrl);
-                    websiteFragment.setArguments(args);
-                    return websiteFragment;
+                    WebsiteFragment companyWebsite = WebsiteFragment.newInstance();
+                    Bundle args1 = new Bundle();
+                    args1.putString(WEBSITE_URL, websiteUrl);
+                    companyWebsite.setArguments(args1);
+                    return companyWebsite;
             }
             return null;
         }

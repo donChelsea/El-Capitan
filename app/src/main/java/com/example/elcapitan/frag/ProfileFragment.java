@@ -1,8 +1,6 @@
 package com.example.elcapitan.frag;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +9,6 @@ import android.support.v4.text.HtmlCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +21,7 @@ import butterknife.ButterKnife;
 
 import static com.example.elcapitan.DetailActivity.COMPANY;
 import static com.example.elcapitan.DetailActivity.COMPANY_LOGO;
-import static com.example.elcapitan.DetailActivity.COMPANY_URL;
+import static com.example.elcapitan.DetailActivity.WEBSITE_URL;
 import static com.example.elcapitan.DetailActivity.CREATED_AT;
 import static com.example.elcapitan.DetailActivity.DESCRIPTION;
 import static com.example.elcapitan.DetailActivity.LOCATION;
@@ -46,7 +43,7 @@ public class ProfileFragment extends Fragment {
     OnFragmentInteractionListener listener;
     @BindView(R.id.profile_title_textview) TextView titleTv;
     @BindView(R.id.profile_company_textview) TextView companyTv;
-    @BindView(R.id.profile_type_textview) TextView typeTv;
+//    @BindView(R.id.profile_type_textview) TextView typeTv;
     @BindView(R.id.profile_description_textview) TextView descriptionTv;
     @BindView(R.id.profile_created_textview) TextView createdTv;
     @BindView(R.id.profile_location_textview) TextView locationTv;
@@ -77,7 +74,7 @@ public class ProfileFragment extends Fragment {
         if (getArguments() != null) {
             title = getArguments().getString(TITLE);
             company = getArguments().getString(COMPANY);
-            companyUrl = getArguments().getString(COMPANY_URL);
+            companyUrl = getArguments().getString(WEBSITE_URL);
             companyLogo = getArguments().getString(COMPANY_LOGO);
             type = getArguments().getString(TYPE);
             url = getArguments().getString(URL);
@@ -99,9 +96,8 @@ public class ProfileFragment extends Fragment {
 
         titleTv.setText(title);
         companyTv.setText(company);
-        typeTv.setText(type);
         descriptionTv.setText(HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_LEGACY));
-        createdTv.setText(correctCreatedAtDate(createdAt));
+        createdTv.setText(correctCreatedAtDate("Posted " + createdAt));
         locationTv.setText(location);
         Picasso.get().load(companyLogo).into(logoIv);
     }

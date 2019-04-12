@@ -1,34 +1,25 @@
 package com.example.elcapitan.view;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.elcapitan.DetailActivity;
 import com.example.elcapitan.OnFragmentInteractionListener;
 import com.example.elcapitan.R;
 import com.example.elcapitan.model.Job;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.elcapitan.DetailActivity.COMPANY;
 import static com.example.elcapitan.DetailActivity.COMPANY_LOGO;
-import static com.example.elcapitan.DetailActivity.COMPANY_URL;
+import static com.example.elcapitan.DetailActivity.WEBSITE_URL;
 import static com.example.elcapitan.DetailActivity.CREATED_AT;
 import static com.example.elcapitan.DetailActivity.DESCRIPTION;
 import static com.example.elcapitan.DetailActivity.LOCATION;
@@ -85,7 +76,7 @@ public class JobViewHolder extends RecyclerView.ViewHolder {
         Bundle args = new Bundle();
         args.putString(TITLE, job.getTitle());
         args.putString(COMPANY, job.getCompany());
-        args.putString(COMPANY_URL, job.getCompany_url());
+        args.putString(WEBSITE_URL, job.getCompany_url());
         args.putString(COMPANY_LOGO, job.getCompany_logo());
         args.putString(URL, job.getUrl());
         args.putString(TYPE, job.getType());
