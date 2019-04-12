@@ -18,7 +18,7 @@ import com.example.elcapitan.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.elcapitan.DetailActivity.COMPANY_URL;
+import static com.example.elcapitan.DetailActivity.WEBSITE_URL;
 
 public class WebsiteFragment extends Fragment {
     String websiteUrl;
@@ -36,7 +36,7 @@ public class WebsiteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            websiteUrl = getArguments().getString(COMPANY_URL);
+            websiteUrl = getArguments().getString(WEBSITE_URL);
         }
     }
 
@@ -52,10 +52,7 @@ public class WebsiteFragment extends Fragment {
 
         webView.setWebViewClient(new WebViewClient());
 
-
-
         if (websiteUrl == null) {
-//            webView.loadUrl("use other website that displays company info, better business beaureu? ");
         } else {
             webView.loadUrl(websiteUrl);
             WebSettings webSettings = webView.getSettings();

@@ -24,6 +24,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +41,7 @@ import static com.example.elcapitan.frag.MainFragment.USER_LOCATION;
 public class ResultsFragment extends Fragment {
     private static final String TAG = "ResultFragment";
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    Retrofit retrofit;
+    Disposable retrofit;
     OnFragmentInteractionListener listener;
 
 
@@ -74,22 +79,15 @@ public class ResultsFragment extends Fragment {
         String userLanguage = args.getString(USER_LANGUAGE);
         boolean showPartTime = args.getBoolean(SHOW_PART_TIME);
 
-        retrofit = RetrofitSingleton.getInstance("https://jobs.github.com/");
-        JobsService jobService = retrofit.create(JobsService.class);
-        Call<List<Job>> listCall = jobService.getJobs(userLanguage, showPartTime, userLocation);
-        listCall.enqueue(new Callback<List<Job>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Job>> call, @NonNull Response<List<Job>> response) {
-                assert response.body() != null;
-                List<Job> jobs = response.body();
-                recyclerView.setAdapter(new JobAdapter(jobs, listener));
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Job>> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: --- " + t.getMessage());
-            }
-        });
+        retrofit = RetrofitSingleton.getInstance("https://jobs.github.com/")
+        .create(JobsService.class)
+        .getJobs(userLanguage, showPartTime, userLocation)
+        .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(jobList -> {
+            assert jobList != null;
+            recyclerView.setAdapter(new JobAdapter(jobList, listener));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }, throwable -> Log.d(TAG, "onFailure: --- " + throwable.getMessage()));
     }
 }

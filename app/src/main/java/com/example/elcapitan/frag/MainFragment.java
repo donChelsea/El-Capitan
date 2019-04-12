@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         container.clearDisappearingChildren();
         return inflater.inflate(R.layout.fragment_main, container, false);
@@ -62,11 +63,19 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        if (savedInstanceState != null) {
+            userLanguage = savedInstanceState.getString(USER_LANGUAGE);
+            languageEdittext.setText(userLanguage);
+            userLocation = savedInstanceState.getString(USER_LOCATION);
+            locationEdittext.setText(userLocation);
+            showPartTime = savedInstanceState.getBoolean(SHOW_PART_TIME);
+        }
+
         Button jobSearchButton = view.findViewById(R.id.job_search_button);
         jobSearchButton.setOnClickListener(v -> {
             userLanguage = languageEdittext.getText().toString().toLowerCase().trim();
             userLocation = locationEdittext.getText().toString().toLowerCase().trim();
-            partTimeCheckbox.setTextColor(getResources().getColor(R.color.colorPrimary)) ;
+            partTimeCheckbox.setTextColor(ContextCompat.getColor(v.getContext(), R.color.colorPrimary));
             partTimeCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (partTimeCheckbox.isChecked()) {
                     showPartTime = true;
@@ -75,5 +84,16 @@ public class MainFragment extends Fragment {
             fragmentInteractionListener.onResultsFragmentInteraction(userLanguage, userLocation, showPartTime);
         });
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(USER_LANGUAGE, userLanguage);
+        outState.putString(USER_LOCATION, userLocation);
+        outState.putBoolean(SHOW_PART_TIME, showPartTime);
+    }
+
+
 }
 
