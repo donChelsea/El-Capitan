@@ -17,7 +17,8 @@
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden"

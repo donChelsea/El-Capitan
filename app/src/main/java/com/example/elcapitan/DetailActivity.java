@@ -59,6 +59,8 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager()));
 
