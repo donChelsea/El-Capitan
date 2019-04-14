@@ -54,7 +54,7 @@ public class JobViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private String correctCreatedAtDate(Job job) {
+    public String correctCreatedAtDate(Job job) {
         String[] createdAtArray = job.getCreated_at().split(" ");
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < 3; i++) {

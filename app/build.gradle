@@ -25,6 +25,9 @@ android {
         options.compilerArgs << '-Xlint:unchecked'
         options.deprecation = true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
