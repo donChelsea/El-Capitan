@@ -11,6 +11,9 @@ public class Job {
     private String description;
     private String company_logo;
 
+    public Job() {
+    }
+
     public Job(String type, String url, String created_at, String company, String company_url, String location, String title, String description, String company_logo) {
         this.type = type;
         this.url = url;
@@ -57,5 +60,41 @@ public class Job {
 
     public String getCompany_logo() {
         return company_logo;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setCompany_url(String company_url) {
+        this.company_url = company_url;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCompany_logo(String company_logo) {
+        this.company_logo = company_logo;
     }
 }
